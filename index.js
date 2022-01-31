@@ -11,17 +11,9 @@ const PORT = process.env.PORT || 3000;
 const FOLDER = process.env.FOLDER || 'public';
 const FILES = process.env.FILES || 'files.json';
 const CRON_RULE = process.env.CRON_RULE || '0 0 0 * * *'; // Everyday at 12 AM
-const CRON_ZONE = process.env.CRON_ZONE
+const CRON_ZONE = process.env.CRON_ZONE;
 
-app.use(express.static(path.join(__dirname, FOLDER)))
-
-let lock = false;
-const getFiles = new CronJob(CRON_RULE, async () => {
-
-    if (lock) return;
-
-    lock = true;
-
+async function getFiles() {
     console.log("||| Downloading files |||");
 
     const files = JSON.parse(fs.readFileSync(FILES, 'utf-8'));
@@ -45,7 +37,6 @@ const getFiles = new CronJob(CRON_RULE, async () => {
 
     if (!files.epg) {
         console.log("||| Files downloaded |||");
-        lock = false;
         return;
     }
 
@@ -73,14 +64,28 @@ const getFiles = new CronJob(CRON_RULE, async () => {
     console.log('||| Merging Files ||| ');
     await merge(files.epg.map(f => join(f.name, 'xml')));
     console.log('||| Files merged ||| ');
+}
+
+let lock = false;
+const cronjob = new CronJob(CRON_RULE, async () => {
+
+    if (lock) return;
+
+    lock = true;
+   
+    await getFiles();
 
     lock = false;
     
 }, CRON_ZONE);
-  
+
+app.use(express.static(path.join(__dirname, FOLDER)));
+
 app.listen(PORT, function(err){
     if (err) console.log(err);
     console.log("Server listening on PORT", PORT);
 });
 
-getFiles.start();
+cronjob.start();
+
+getFiles();
