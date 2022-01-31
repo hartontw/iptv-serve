@@ -27,16 +27,16 @@ npm install
 
 ### Configuration
 
-- Create .env file inside project folder or set environment variables
+Create .env file inside project folder or set environment variables
 
-PORT (3000): Listening port
-FOLDER (public): Folder where files are served
-FILES (files.json): JSON file with urls and names to download an write in disk drive
-CRON_RULE (0 0 0 * * *): Cronjob rule to start the download and merge epg files
-CRON_ZONE (optional): Time Zone to start the job.
+- PORT (3000): Listening port
+- FOLDER (public): Folder where files are served
+- FILES (files.json): JSON file with urls and names to download an write in disk drive
+- CRON_RULE (0 0 0 * * *): Cronjob rule to start the download and merge epg files
+- CRON_ZONE (optional): Time Zone to start the job.
 
-- Create files.json (or set another name in environment variable) inside project folder
-Example:
+Create files.json (or set another name in environment variable) inside project folder
+
 ```files.json```
 ```json
 {
