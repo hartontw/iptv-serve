@@ -4,8 +4,8 @@ const path = require('path');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-const MASTER = path.join(process.env.FOLDER, 'master.xml');
-const MERGED = path.join(process.env.FOLDER, 'merged.xml')
+const MASTER = path.join(__dirname, process.env.FOLDER, 'master.xml');
+const MERGED = path.join(__dirname, process.env.FOLDER, 'merged.xml')
 
 async function merge(master, add) {
     const { stdout, stderr } = await exec(`tv_merge -i ${master} -m ${add} -o ${MERGED}`);

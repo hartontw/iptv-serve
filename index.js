@@ -8,8 +8,8 @@ const fs = require('fs');
 const CronJob = require('cron').CronJob;
 
 const PORT = process.env.PORT || 3000;
-const FOLDER = process.env.FOLDER || 'public';
-const FILES = process.env.FILES || 'files.json';
+const FOLDER = path.join(__dirname, process.env.FOLDER || 'public');
+const FILES = path.join(__dirname, process.env.FILES || 'files.json');
 const CRON_RULE = process.env.CRON_RULE || '0 0 0 * * *'; // Everyday at 12 AM
 const CRON_ZONE = process.env.CRON_ZONE;
 
@@ -79,7 +79,7 @@ const cronjob = new CronJob(CRON_RULE, async () => {
     
 }, CRON_ZONE);
 
-app.use(express.static(path.join(__dirname, FOLDER)));
+app.use(express.static(FOLDER));
 
 app.listen(PORT, function(err){
     if (err) console.log(err);
