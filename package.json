@@ -1,0 +1,20 @@
+{
+  "name": "iptv-serve",
+  "version": "1.0.0",
+  "description": "Static server for m3u and epg files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "iptv",
+    "pluto",
+    "tv",
+    "kodi",
+    "tvheadend",
+    "m3u",
+    "epg"
+  ],
+  "author": "Daniel 'Harton'",
+  "license": "ISC"
+}
