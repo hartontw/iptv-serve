@@ -16,5 +16,11 @@
     "epg"
   ],
   "author": "Daniel 'Harton'",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cron": "^1.8.2",
+    "dotenv": "^15.0.0",
+    "download": "^8.0.0",
+    "express": "^4.17.2"
+  }
 }
