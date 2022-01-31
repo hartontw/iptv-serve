@@ -30,16 +30,24 @@ const getFiles = new CronJob(CRON_RULE, async () => {
         return path.join(FOLDER, `${name}.${ext}`)
     }
 
-    files.m3u.forEach(f => {
-        const timestamp = new Date().toISOString();
-        download(f.url, join(f.name, 'm3u'))
-        .then(()=> {
-            console.log(`${timestamp}: ${f.name}.m3u downloaded.`);
-        })
-        .catch(err => {
-            console.error(`${timestamp}: ${err.message}`);
-        })
-    });
+    if (files.m3u) {
+        files.m3u.forEach(f => {
+            const timestamp = new Date().toISOString();
+            download(f.url, join(f.name, 'm3u'))
+            .then(()=> {
+                console.log(`${timestamp}: ${f.name}.m3u downloaded.`);
+            })
+            .catch(err => {
+                console.error(`${timestamp}: ${err.message}`);
+            })
+        });
+    }
+
+    if (!files.epg) {
+        console.log("||| Files downloaded |||");
+        lock = false;
+        return;
+    }
 
     const dwnl = async f => {
         const timestamp = new Date().toISOString();
