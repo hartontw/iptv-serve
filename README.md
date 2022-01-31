@@ -1,6 +1,13 @@
 # iptv-serve
 
-Static server for m3u and epg files
+### Purpose
+
+Download m3u files and downloads and merge xml files for serving those as static files in local network.
+
+1. Serves statis files in local network
+2. Schedules download and merge task
+2.1. Downloads m3u files
+2.2. Downloads xml files and merge thoses in a single file
 
 ### Requeriments
 - [xmltv-util](https://github.com/XMLTV/xmltv)
@@ -72,3 +79,12 @@ module.exports = {
     ]
 };
 ```
+
+### Access
+
+Examples:
+http://192.168.0.50:3000/Pluto.m3u
+http://192.168.0.50:3000/Pluto.xml
+http://localhost:3000/master.xml
+http://192.168.1.95/TDT.xml
+http://192.168.1.95/master.xml
